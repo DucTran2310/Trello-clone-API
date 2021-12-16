@@ -1,0 +1,29 @@
+{
+    "name": "Trello-clone-API",
+    "version": "1.0.0",
+    "description": "Build API for trello clone app",
+    "main": "src/server.js",
+    "type": "module",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "eslint": "eslint src"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/DucTran2310/Trello-clone-API.git"
+    },
+    "keywords": [],
+    "author": "DucTran",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/DucTran2310/Trello-clone-API/issues"
+    },
+    "homepage": "https://github.com/DucTran2310/Trello-clone-API#readme",
+    "dependencies": {
+        "express": "^4.17.1"
+    },
+    "devDependencies": {
+        "babel-eslint": "^10.1.0",
+        "eslint": "^8.4.1"
+    }
+}
