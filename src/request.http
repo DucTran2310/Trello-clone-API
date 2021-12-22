@@ -1,0 +1,8 @@
+###
+POST http://localhost:8080/v1/columns
+Content-Type: application/json
+
+{
+  "title": "ad column",
+  "boardId": "61c1e2f6f01f6d1b6c5e4171"
+}

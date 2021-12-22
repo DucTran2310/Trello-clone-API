@@ -23,6 +23,7 @@ const bootServer = () => {
 
   // Enable req.body data
   app.use(express.json())
+  app.use(express.urlencoded({ extended: true }))
 
   // Use APIs v1
   app.use('/v1', apiV1)
