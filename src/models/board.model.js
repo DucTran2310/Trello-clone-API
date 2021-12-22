@@ -5,7 +5,7 @@ import { getDB } from '*/config/mongodb'
 const boardCollectionName = 'boards'
 
 const boardCollectionSchema = Joi.object({
-  title: Joi.string().required().min(3).max(20),
+  title: Joi.string().required().min(3).max(20).trim(),
   // columnOrder la 1 array, moi item ben trong no co kieu du lieu gi
   columnOrder: Joi.array().items(Joi.string()).default([]),
   createdAt: Joi.date().timestamp().default(Date.now()),
@@ -27,7 +27,7 @@ const createNew = async (data) => {
     //console.log(result)
     return await getDB().collection(boardCollectionName).findOne(result.insertedId)
   } catch (error) {
-    console.log(error)
+    //console.log(error)
     throw new Error(error)
   }
 }
