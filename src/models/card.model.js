@@ -1,4 +1,5 @@
 import Joi from 'joi'
+import { ObjectId } from 'mongodb'
 import { getDB } from '*/config/mongodb'
 
 // Define Card Collection
@@ -22,8 +23,15 @@ const validateSchema = async (data) => {
 
 const createNew = async (data) => {
   try {
-    const value = await validateSchema(data)
-    const result = await getDB().collection(cardCollectionName).insertOne(value)
+    const validatedValue = await validateSchema(data)
+    //Clone lại value và ghi đè id từ string -> ObjectId
+    const valueInsert = {
+      ...validatedValue,
+      boardId: ObjectId(validatedValue.boardId),
+      columnId: ObjectId(validatedValue.columnId)
+    }
+
+    const result = await getDB().collection(cardCollectionName).insertOne(valueInsert)
     //console.log(result)
     return await getDB().collection(cardCollectionName).findOne(result.insertedId)
   } catch (error) {
@@ -32,4 +40,7 @@ const createNew = async (data) => {
   }
 }
 
-export const CardModel = { createNew }
+export const CardModel = {
+  createNew,
+  cardCollectionName
+}

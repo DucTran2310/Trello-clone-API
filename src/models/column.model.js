@@ -22,17 +22,37 @@ const validateSchema = async (data) => {
 
 const createNew = async (data) => {
   try {
-    const value = await validateSchema(data)
+    const validatedValue = await validateSchema(data)
     //Clone lại value và ghi đè id từ string -> ObjectId
-    // const valueInsert = {
-    //   ...valueValidate,
-    //   boardId: ObjectId(valueValidate.boardId)
-    // }
-    const result = await getDB().collection(columnCollectionName).insertOne(value)
+    const valueInsert = {
+      ...validatedValue,
+      boardId: ObjectId(validatedValue.boardId)
+    }
+
+    const result = await getDB().collection(columnCollectionName).insertOne(valueInsert)
     console.log(result)
+
     return await getDB().collection(columnCollectionName).findOne(result.insertedId)
   } catch (error) {
     console.log(error)
+    throw new Error(error)
+  }
+}
+
+/**
+ *
+ * @param {string} boardId
+ * @param {string} columnId
+ */
+const pushCardOrder = async (columnId, cardId) => {
+  try {
+    const result = await getDB().collection(columnCollectionName).findOneAndUpdate(
+      { _id: ObjectId(columnId) }, //tìm đến id của column cần update
+      { $push: { cardOrder: cardId } }, //push cardId vừa tạo vào CardOrder Array
+      { returnDocument: 'after' } //trả về bản ghi đã update, true -> bản ghi chưa update
+    )
+    return result.value
+  } catch (error) {
     throw new Error(error)
   }
 }
@@ -54,6 +74,8 @@ const update = async (id, data) => {
 }
 
 export const ColumnModel = {
+  columnCollectionName,
   createNew,
+  pushCardOrder,
   update
 }
