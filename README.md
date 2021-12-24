@@ -11,11 +11,11 @@
   src
   |__components
   |           |__config
-  |           |__controllers
+  |           |__controllers (data navigation)
   |           |__middlewares
-  |           |__models
+  |           |__models (interact with database)
   |           |__routes
-  |           |__services
+  |           |__services (handling logic)
   |           |__utilities
   |           |__validations
   |__server.js
@@ -32,4 +32,9 @@ $ npm start
 
 -   Backend
 
-    -       ExpressJS
+    -         ExpressJS
+    -         Nodemon
+    -         babel-plugin-module-resolver
+    -         mongodb native driver
+    -         dotenv
+    -         CORS & Joi
