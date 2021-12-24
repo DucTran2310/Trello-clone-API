@@ -1,7 +1,8 @@
 import express from 'express'
+import cors from 'cors'
+import { corsOptions } from '*/config/mongodb'
 import { connectDB } from '*/config/mongodb'
 import { env } from '*/config/environment'
-import { BoardModel } from '*/models/board.model'
 import { apiV1 } from '*/routes/v1'
 
 // const hostName = 'localhost'
@@ -20,6 +21,8 @@ connectDB()
 
 const bootServer = () => {
   const app = express()
+
+  app.use(cors(corsOptions))
 
   // Enable req.body data
   app.use(express.json())
