@@ -66,13 +66,6 @@ const getFullBoard = async (boardId) => {
           _destroy: false
         }
       },
-      // {
-      //   $addFields: {
-      //     _id: {
-      //       $toString: '$_id'
-      //     }
-      //   }
-      // },
       {
         $lookup: {
           from: ColumnModel.columnCollectionName, //collection name

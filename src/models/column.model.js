@@ -59,10 +59,15 @@ const pushCardOrder = async (columnId, cardId) => {
 
 const update = async (id, data) => {
   try {
+    const updateData = { ...data }
+    //Kiểm tra nếu data đẩy lên server có tồn tại boardId thì convert boardId từ string -> objectID
+    if (data.boardId) {
+      updateData.boardId = ObjectId(data.boardId)
+    }
     const result = await getDB().collection(columnCollectionName).findOneAndUpdate(
       // tìm phần tử theo id
       { _id: ObjectId(id) }, //tìm đến id của column cần update
-      { $set: data }, //data update từ service truyền qua
+      { $set: updateData }, //data update từ service truyền qua
       { returnDocument: 'after' } //trả về bản ghi đã update, true -> bản ghi chưa update
     )
     console.log(result)

@@ -40,7 +40,28 @@ const createNew = async (data) => {
   }
 }
 
+/**
+ *
+ * @param {Array of string card id} ids
+ */
+const deleteMany = async (ids) => {
+  try {
+    //Chuyển đổi các phần tử id:string -> id:object trong mảng ids
+    const transformIds = ids.map(i => ObjectId(i))
+    //Await đến hàm GetDB rồi insert cái value đã validate vào
+    const result = await getDB().collection(cardCollectionName).updateMany(
+      { _id: { $in: transformIds } }, //Update những _id nào nằm trong mảng ids
+      { $set: { _destroy: true } } //Update lại _destroy = true
+    )
+    return result
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
+
 export const CardModel = {
+  cardCollectionName,
   createNew,
-  cardCollectionName
+  deleteMany
 }
