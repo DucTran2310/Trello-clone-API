@@ -18,18 +18,21 @@ const getFullBoard = async (boardId) => {
       throw new Error('Board Not Found!')
     }
 
+    const transformBoard = cloneDeep(board)
+    //Filter những column có destroy:false thì mới cho hiển thị ra
+    transformBoard.columns = transformBoard.columns.filter(column => !column._destroy)
     //Add card to each column
-    board.columns.forEach(column => {
-      column.cards = board.cards.filter(c => c.columnId.toString() === column._id.toString())
+    transformBoard.columns.forEach(column => {
+      column.cards = transformBoard.cards.filter(c => c.columnId.toString() === column._id.toString())
     })
 
     //Sort columns by columnOrder, sort cards by cardOrder -> frontend
     //Remove Card Data From Board Collection
-    delete board.cards
+    delete transformBoard.cards
 
     //console.log(board)
 
-    return board
+    return transformBoard
   } catch (error) {
     //console.log(error)
     throw new Error(error)
