@@ -70,10 +70,8 @@ const update = async (id, data) => {
       { $set: updateData }, //data update từ service truyền qua
       { returnDocument: 'after' } //trả về bản ghi đã update, true -> bản ghi chưa update
     )
-    console.log(result)
     return result.value
   } catch (error) {
-    console.log(error)
     throw new Error(error)
   }
 }

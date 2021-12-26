@@ -28,8 +28,24 @@ const getFullBoard = async (req, res) => {
   }
 }
 
+const update = async (req, res) => {
+  try {
+    const { id } = req.params
+    const result = await BoardService.update(id, req.body)
+
+    //console.log(result)
+    res.status(HttpStatusCode.OK).json(result)
+  } catch (error) {
+    res.status(HttpStatusCode.INTERNAL_SERVER).json({
+      errors: error.message
+    })
+    //console.log(error)
+  }
+}
+
 export const BoardController = {
   createNew,
-  getFullBoard
+  getFullBoard,
+  update
 }
 
