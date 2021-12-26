@@ -20,4 +20,26 @@ const createNew = async (req, res, next) => {
   }
 }
 
-export const CardValidation = { createNew }
+const update = async (req, res, next) => {
+  //console.log(req.query)
+  const condition = Joi.object({
+    title: Joi.string().min(3).max(20).trim(),
+    board: Joi.string(),
+    columnId: Joi.string()
+  })
+  try {
+    await condition.validateAsync(req.body, {
+      abortEarly: false,
+      allowUnknown: true
+    })
+    //Nếu thỏa mãn condition => controller
+    next()
+  } catch (error) {
+    //console.log(error)
+    res.status(HttpStatusCode.BAD_REQUEST).json({
+      errors: new Error(error).message
+    })
+  }
+}
+
+export const CardValidation = { createNew, update }
