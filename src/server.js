@@ -2,7 +2,7 @@ import express from 'express'
 import cors from 'cors'
 import { corsOptions } from '*/config/mongodb'
 import { connectDB } from '*/config/mongodb'
-// import { env } from '*/config/environment'
+import { env } from '*/config/environment'
 import { apiV1 } from '*/routes/v1'
 
 // const hostName = 'localhost'
