@@ -8,7 +8,7 @@ export const HttpStatusCode = {
 
 export const WHITELIST_DOMAIN = [
   'http://localhost:3000',
-  'https://trello-clone-661c3.web.app/',
-  'https://trello-clone-661c3.firebaseapp.com/'
+  'https://trello-clone-661c3.web.app',
+  'https://trello-clone-661c3.firebaseapp.com'
 ]
 
