@@ -36,7 +36,8 @@ const bootServer = () => {
   // })
 
   // Support heroku deploy
-  app.listen(process.env.PORT, () => {
-    console.log(`Hello ADSTAR, Running at : ${process.env.PORT}/`)
+  const PORT = process.env.PORT || 8080
+  app.listen(PORT, () => {
+    console.log('Server s running')
   })
 }
