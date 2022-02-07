@@ -38,6 +38,6 @@ const bootServer = () => {
   // Support heroku deploy
   const PORT = process.env.PORT || 8080
   app.listen(PORT, () => {
-    console.log('Server s running')
+    console.log(`Server is running ${PORT}`)
   })
 }

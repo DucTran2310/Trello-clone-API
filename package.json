@@ -6,14 +6,12 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "eslint": "eslint src",
-        "remove-build": "rmdir /s /q build",
-        "create-build": "mkdir build",
-        "clean": "npm run remove-build && npm run create-build",
+        "clean": "del -rf build && mkdir build",
         "build-babel": "babel ./src -d ./build/src",
         "build": "npm run clean && npm run build-babel",
         "production": "npm run build && node ./build/src/server.js",
         "dev": "nodemon --exec ./node_modules/.bin/babel-node ./src/server.js",
-        "start": ""
+        "start": "node ./build/src/server.js"
     },
     "repository": {
         "type": "git",
